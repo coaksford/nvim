@@ -5,4 +5,4 @@ require('zuli.terminal')
 require('zuli.colors')
 
 
-
+vim.wo.relativenumber = true
