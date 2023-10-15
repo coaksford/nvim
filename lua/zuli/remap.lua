@@ -9,6 +9,16 @@ vim.keymap.set( 'n' , '<leader>th', ':bprev<Enter>', { silent = true })
 vim.keymap.set( 'n' , '<leader>tc', ':split<Enter>', { silent = true })
 vim.keymap.set( 'n' , '<leader>tn', ':vsplit<Enter>', { silent = true })
 
+-- create a new tabe
+vim.keymap.set( 'n' , '<leader>..', ':tabnew<Enter>', { silent = true })
+-- switch to prev tab
+vim.keymap.set( 'n' , '<leader>.,', ':tabp<Enter>', { silent = true })
+-- switch to next tab
+vim.keymap.set( 'n' , '<leader>.p', ':tabn<Enter>', { silent = true })
+-- close tab
+vim.keymap.set( 'n' , '<leader>.e', ':tabclose<Enter>', { silent = true })
+
+
 
 
 local ts = require('telescope.builtin')
