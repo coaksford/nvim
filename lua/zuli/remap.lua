@@ -17,11 +17,12 @@ vim.keymap.set('n', '<leader>so', ts.oldfiles, {})
 vim.keymap.set('n', '<leader>sb', ts.buffers, {})
 vim.keymap.set('n', '<leader>sc', ts.builtin, {})
 
-if vim.g.neovide then
+if vim.g.neovide and vim.fn.has("macos") then
   -- copy with cmd+C for macos
   vim.api.nvim_set_keymap('', '<D-c>', '"+y', { noremap = true, silent = true })
+  -- paste with cmd+C for macos, but only in insert mode.
+  vim.api.nvim_set_keymap('!', '<D-v>', '<C-R>+', { noremap = true, silent = true })
 end
 
--- paste with cmd+C for macos, but only in insert mode.
-vim.api.nvim_set_keymap('!', '<D-v>', '<C-R>+', { noremap = true, silent = true })
+
 
