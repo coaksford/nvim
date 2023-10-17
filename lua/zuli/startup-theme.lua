@@ -85,7 +85,7 @@ local settings = {
     body = body, -- as much sections as you like
     options = {
         mapping_keys = true, -- display mapping (e.g. <leader>ff)
-        cursor_column = 1.0,
+        cursor_column = 0.40,
         --after = function() -- function that gets executed at the end
         --    <lua commands>
         --end,
