@@ -51,10 +51,9 @@ return {
       "nvim-telescope/telescope.nvim",
       "nvim-lua/plenary.nvim",
     },
-    --  config = function()
-      -- vim.g.startup_disable_on_startup = true
-      -- require("startup").setup(require("zuli.startup-theme"))
-    -- end
+    config = function()
+      require("startup").setup(require("zuli.startup-theme"))
+    end
   },{
     "ahmedkhalf/project.nvim",
     config = function()
