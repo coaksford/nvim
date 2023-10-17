@@ -45,6 +45,25 @@ return {
     "hrsh7th/vim-vsnip",
   },{
     "ThePrimeagen/vim-be-good"
-  },
+  },{
+    "startup-nvim/startup.nvim",
+    dependencies = {
+      "nvim-telescope/telescope.nvim",
+      "nvim-lua/plenary.nvim",
+    },
+    --  config = function()
+      -- vim.g.startup_disable_on_startup = true
+      -- require("startup").setup(require("zuli.startup-theme"))
+    -- end
+  },{
+    "ahmedkhalf/project.nvim",
+    config = function()
+      require("project_nvim").setup {
+        manual_mode = false,
+        exclude_dirs = { "~/.cargo/*", },
+        detection_methods = { "lsp", "pattern" },
+      }
+    end
+  }
 }
 
