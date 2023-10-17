@@ -61,6 +61,8 @@ return {
         manual_mode = false,
         exclude_dirs = { "~/.cargo/*", },
         detection_methods = { "lsp", "pattern" },
+        silent_chdir = true,
+        scope_chdir = 'global',
       }
     end
   }

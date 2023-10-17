@@ -67,7 +67,8 @@ local body = {
     margin = 5,
     content = {
         { " New File", "lua require'startup'.new_file()", "<leader>n" },
-        { " Recent Files", "Telescope oldfiles", "<leader>r" },
+        { " Recent Projects", "Telescope projects", "<leader>sp" },
+        --{ " Recent Files", "Telescope oldfiles", "<leader>r" },
         { " Search for Files", "Telescope find_files", "<leader>sf" },
         { " Search by grep", "Telescope live_grep", "<leader>sg" },
         { " File sidebar", "NvimTreeToggle", "<leader>o" },
