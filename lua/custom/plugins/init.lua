@@ -65,6 +65,9 @@ return {
         scope_chdir = 'global',
       }
     end
-  }
+  },
+  {
+    'puremourning/vimspector'
+  },
 }
 

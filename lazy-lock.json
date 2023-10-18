@@ -37,5 +37,6 @@
   "vim-rhubarb": { "branch": "master", "commit": "ee69335de176d9325267b0fd2597a22901d927b1" },
   "vim-sleuth": { "branch": "master", "commit": "1cc4557420f215d02c4d2645a748a816c220e99b" },
   "vim-vsnip": { "branch": "master", "commit": "be277461265f1e5c7db470aa479f30956597ea9e" },
+  "vimspector": { "branch": "master", "commit": "831530b85aad02f2c465047a21452409bfaaf784" },
   "which-key.nvim": { "branch": "main", "commit": "7ccf476ebe0445a741b64e36c78a682c1c6118b7" }
 }
