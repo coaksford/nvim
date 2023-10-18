@@ -21,31 +21,20 @@ return {
       require("nvim-tree").setup {}
     end,
   },
+  { 'tomasiser/vim-code-dark' },
+  { "neovim/nvim-lspconfig", },
+  { "simrat39/rust-tools.nvim", },
+  { "hrsh7th/cmp-buffer", },
+  { "hrsh7th/cmp-nvim-lsp", },
+  { "hrsh7th/cmp-nvim-lsp-signature-help", },
+  { "hrsh7th/cmp-nvim-lua", },
+  { "hrsh7th/cmp-path", },
+  { "hrsh7th/cmp-vsnip", },
+  { "hrsh7th/nvim-cmp", },
+  { "hrsh7th/vim-vsnip", },
+  { "ThePrimeagen/vim-be-good" },
+  { 'puremourning/vimspector' },
   {
-    "neovim/nvim-lspconfig",
-  },
-  {
-    "simrat39/rust-tools.nvim",
-  },
-  {
-    "hrsh7th/cmp-buffer",
-  },{
-    "hrsh7th/cmp-nvim-lsp",
-  },{
-    "hrsh7th/cmp-nvim-lsp-signature-help",
-  },{
-    "hrsh7th/cmp-nvim-lua",
-  },{
-    "hrsh7th/cmp-path",
-  },{
-    "hrsh7th/cmp-vsnip",
-  },{
-    "hrsh7th/nvim-cmp",
-  },{
-    "hrsh7th/vim-vsnip",
-  },{
-    "ThePrimeagen/vim-be-good"
-  },{
     "startup-nvim/startup.nvim",
     dependencies = {
       "nvim-telescope/telescope.nvim",
@@ -54,7 +43,8 @@ return {
     config = function()
       require("startup").setup(require("zuli.startup-theme"))
     end
-  },{
+  },
+  {
     "ahmedkhalf/project.nvim",
     config = function()
       require("project_nvim").setup {
@@ -65,9 +55,6 @@ return {
         scope_chdir = 'global',
       }
     end
-  },
-  {
-    'puremourning/vimspector'
   },
 }
 
