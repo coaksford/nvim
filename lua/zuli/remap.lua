@@ -13,6 +13,7 @@ vim.keymap.set( 'n', '<leader>ts', ':ToggleTerm size=80 direction=vertical<Enter
 vim.keymap.set( 'n', '<leader>tn', ':bnext<Enter>', { silent = true, desc = "Next buffer" })
 vim.keymap.set( 'n', '<leader>th', ':bprev<Enter>', { silent = true, desc = "Previous buffer" })
 vim.keymap.set( 'n', '<leader>tc', ':split<Enter>', { silent = true, desc = "Split" })
+vim.keymap.set( 'n', '<leader>tn', ':vsplit<Enter>', { silent = true, desc = "Vertical split" })
 vim.keymap.set( 'n', '<leader>pd', preview.goto_preview_definition, { silent = true, desc = "[P]review [D]efinition" })
 vim.keymap.set( 'n', '<leader>pl', preview.goto_preview_declaration, { silent = true, desc = "[P]review dec[L]aration" })
 vim.keymap.set( 'n', '<leader>pi', preview.goto_preview_implementation, { silent = true, desc = "[P]review [I]mplementation" })
