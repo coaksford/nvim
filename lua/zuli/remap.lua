@@ -2,7 +2,7 @@ local ts = require('telescope.builtin')
 local tsproj = require'telescope'.extensions.projects
 local preview = require('goto-preview')
 
-vim.keymap.set( 'n', '<leader>o', ':NvimTreeToggle<Enter>', { silent = true })
+vim.keymap.set( 'n', '<leader>e', ':NvimTreeToggle<Enter>', { silent = true })
 vim.keymap.set( 'n', '<leader>ss', ts.builtin, { silent = true, desc = "[S]earch [S]omething" })
 vim.keymap.set( 'n', '<leader>sf', ts.find_files, { desc = "[S]earch [F]iles" })
 vim.keymap.set( 'n', '<leader>so', ts.oldfiles, { desc = "[S]earch [O]ld files" })
