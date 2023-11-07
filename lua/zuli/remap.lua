@@ -20,6 +20,17 @@ vim.keymap.set( 'n', '<leader>pi', preview.goto_preview_implementation, { silent
 vim.keymap.set( 'n', '<leader>pr', preview.goto_preview_references, { silent = true, desc = "[P]review [R]eferences" })
 vim.keymap.set( 'n', '<leader>pc', preview.close_all_win, { silent = true, desc = "[P]review [C]lose" })
 
+vim.keymap.set( 't', '<C-h>', [[<C-\><C-n><C-W>h]], { silent = true, desc = "Switch windows left"})
+vim.keymap.set( 't', '<C-j>', [[<C-\><C-n><C-W>j]], { silent = true, desc = "Switch windows down"})
+vim.keymap.set( 't', '<C-k>', [[<C-\><C-n><C-W>k]], { silent = true, desc = "Switch windows up"})
+vim.keymap.set( 't', '<C-l>', [[<C-\><C-n><C-W>l]], { silent = true, desc = "Switch windows right"})
+
+vim.keymap.set( 'n', '<C-h>', [[<C-W>h]], { silent = true, desc = "Switch windows left"})
+vim.keymap.set( 'n', '<C-j>', [[<C-W>j]], { silent = true, desc = "Switch windows down"})
+vim.keymap.set( 'n', '<C-k>', [[<C-W>k]], { silent = true, desc = "Switch windows up"})
+vim.keymap.set( 'n', '<C-l>', [[<C-W>l]], { silent = true, desc = "Switch windows right"})
+
+
 -- create a new tab
 vim.keymap.set( 'n' , '<leader>..', ':tabnew<Enter>', { silent = true })
 -- switch to prev tab
