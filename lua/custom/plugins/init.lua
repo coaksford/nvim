@@ -21,6 +21,7 @@ return {
       require("nvim-tree").setup {}
     end,
   },
+  { 'coaksford/nvim-theme' },
   { 'tomasiser/vim-code-dark' },
   { "neovim/nvim-lspconfig", },
   { "simrat39/rust-tools.nvim", },
