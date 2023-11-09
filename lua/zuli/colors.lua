@@ -1,3 +1,3 @@
 -- vim.cmd('colorscheme tokyonight-night')
-vim.cmd('colorscheme codedark')
+vim.cmd('colorscheme vscode')
 
