@@ -21,18 +21,15 @@ vim.keymap.set( 'n', '<leader>tn', ':bnext<Enter>', { silent = true, desc = "Nex
 vim.keymap.set( 'n', '<leader>th', ':bprev<Enter>', { silent = true, desc = "Previous buffer" })
 vim.keymap.set( 'n', '<leader>tc', ':split<Enter>', { silent = true, desc = "Horizontal split" })
 vim.keymap.set( 'n', '<leader>tn', ':vsplit<Enter>', { silent = true, desc = "Vertical split" })
-<<<<<<< HEAD
 
 vim.keymap.set( 'n', '_', ':split<Enter>', { silent = true, desc = "Horizontal split" })
 vim.keymap.set( 'n', '|', ':vsplit<Enter>', { silent = true, desc = "Vertical split" })
-=======
 vim.keymap.set( 'n', '<leader>pd', preview.goto_preview_definition, { silent = true, desc = "[P]review [D]efinition" })
 vim.keymap.set( 'n', '<leader>pl', preview.goto_preview_declaration, { silent = true, desc = "[P]review dec[L]aration" })
 vim.keymap.set( 'n', '<leader>pi', preview.goto_preview_implementation, { silent = true, desc = "[P]review [I]mplementation" })
 vim.keymap.set( 'n', '<leader>pr', preview.goto_preview_references, { silent = true, desc = "[P]review [R]eferences" })
 vim.keymap.set( 'n', '<leader>pc', preview.close_all_win, { silent = true, desc = "[P]review [C]lose" })
 vim.keymap.set( 'n', '<leader>rn', vim.lsp.buf.rename, { silent = true, desc = "[R]e[n]ame"})
->>>>>>> a816ce2 (Add renaming keymap.)
 
 vim.keymap.set( 't', '<C-h>', [[<C-\><C-n><C-W>h]], { silent = true, desc = "Switch windows left"})
 vim.keymap.set( 't', '<C-j>', [[<C-\><C-n><C-W>j]], { silent = true, desc = "Switch windows down"})
