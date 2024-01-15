@@ -12,6 +12,12 @@ vim.keymap.set( 'n', '<leader>so', ts.oldfiles, { desc = "[S]earch [O]ld files" 
 vim.keymap.set( 'n', '<leader>sb', ts.buffers, { desc = "[S]earch [B]uffers" })
 vim.keymap.set( 'n', '<leader>sp', tsproj.projects, { desc = "[S]earch [P]rojects" })
 
+-- resize
+vim.keymap.set( 'n', '<leader>rv', ':vertical resize +5<Enter>', { silent = true, desc = "[R]esize [v]ertical +5" })
+vim.keymap.set( 'n', '<leader>rV', ':vertical resize -5<Enter>', { silent = true, desc = "[R]esize [V]ertical -5" })
+vim.keymap.set( 'n', '<leader>rh', ':resize +5<Enter>', { silent = true, desc = "[R]esize [h]orizantal +5" })
+vim.keymap.set( 'n', '<leader>rH', ':resize -5<Enter>', { silent = true, desc = "[R]esize [H]orizontal -5" })
+
 -- toggleterm
 vim.keymap.set( 'n', '<leader>tt', ':ToggleTerm size=80 direction=float<Enter>', { silent = true, desc = "[T]oggle[T]erm centered" })
 vim.keymap.set( 'n', '<leader>ts', ':ToggleTerm size=80 direction=vertical<Enter>', { silent = true, desc = "[T]oggleTerm [S]ide" })
