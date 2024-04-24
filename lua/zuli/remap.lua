@@ -2,29 +2,46 @@ local ts = require('telescope.builtin')
 local tsproj = require'telescope'.extensions.projects
 local preview = require('goto-preview')
 
-vim.keymap.set( 'n', '<leader>e', ':NvimTreeToggle<Enter>', { silent = true })
+-- why hit shift to get into command mode?
+vim.keymap.set( 'n', ';', ':')
+
+-- drag a visual selection up and down with J and K
+vim.keymap.set( 'v', 'K', ":m '>+1<CR>gv=gv")
+vim.keymap.set( 'v', 'J', ":m '<-2<CR>gv=gv")
 
 -- search
 vim.keymap.set( 'n', '<leader>s', '', { silent = true, desc = "[S]earch" })
 vim.keymap.set( 'n', '<leader>ss', ts.builtin, { silent = true, desc = "[S]earch [S]omething" })
-vim.keymap.set( 'n', '<leader>sf', ts.find_files, { desc = "[S]earch [F]iles" })
-vim.keymap.set( 'n', '<leader>so', ts.oldfiles, { desc = "[S]earch [O]ld files" })
+vim.keymap.set( 'n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
+vim.keymap.set( 'n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
+vim.keymap.set( 'n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
+vim.keymap.set( 'n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
+vim.keymap.set( 'n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
+vim.keymap.set( 'n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
 vim.keymap.set( 'n', '<leader>sb', ts.buffers, { desc = "[S]earch [B]uffers" })
 vim.keymap.set( 'n', '<leader>sp', tsproj.projects, { desc = "[S]earch [P]rojects" })
+vim.keymap.set( 'n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
+vim.keymap.set( 'n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
+vim.keymap.set( 'n', '<leader>f', function()
+  -- You can pass additional configuration to telescope to change theme, layout, etc.
+  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+    winblend = 10,
+    previewer = false,
+  })
+end, { desc = '[f] Fuzzily search in current buffer' })
 
--- resize
-vim.keymap.set( 'n', '<leader>rv', ':vertical resize +5<Enter>', { silent = true, desc = "[R]esize [v]ertical +5" })
-vim.keymap.set( 'n', '<leader>rV', ':vertical resize -5<Enter>', { silent = true, desc = "[R]esize [V]ertical -5" })
-vim.keymap.set( 'n', '<leader>rh', ':resize +5<Enter>', { silent = true, desc = "[R]esize [h]orizantal +5" })
-vim.keymap.set( 'n', '<leader>rH', ':resize -5<Enter>', { silent = true, desc = "[R]esize [H]orizontal -5" })
+-- resize, provide distance and then enter
+vim.keymap.set( 'n', '<leader>rv', ':vertical resize +', { silent = true, desc = "[R]esize [v]ertical split +" })
+vim.keymap.set( 'n', '<leader>rV', ':vertical resize -', { silent = true, desc = "[R]esize [V]ertical split -" })
+vim.keymap.set( 'n', '<leader>rh', ':resize +', { silent = true, desc = "[R]esize [h]orizantal split +" })
+vim.keymap.set( 'n', '<leader>rH', ':resize -', { silent = true, desc = "[R]esize [H]orizontal split -" })
 
 -- toggleterm
 vim.keymap.set( 'n', '<leader>tt', ':ToggleTerm size=80 direction=float<Enter>', { silent = true, desc = "[T]oggle[T]erm centered" })
 vim.keymap.set( 'n', '<leader>ts', ':ToggleTerm size=80 direction=vertical<Enter>', { silent = true, desc = "[T]oggleTerm [S]ide" })
 
 -- buffer switching
-vim.keymap.set( 'n', '<leader>tn', ':bnext<Enter>', { silent = true, desc = "Next buffer" })
-vim.keymap.set( 'n', '<leader>th', ':bprev<Enter>', { silent = true, desc = "Previous buffer" })
+vim.keymap.set( 'n', '<leader>th', ':NvimTreeToggle<Enter>', { silent = true })
 vim.keymap.set( 'n', '<leader>tc', ':split<Enter>', { silent = true, desc = "Horizontal split" })
 vim.keymap.set( 'n', '<leader>tn', ':vsplit<Enter>', { silent = true, desc = "Vertical split" })
 
@@ -32,15 +49,31 @@ vim.keymap.set( 'n', '_', ':split<Enter>', { silent = true, desc = "Horizontal s
 vim.keymap.set( 'n', '|', ':vsplit<Enter>', { silent = true, desc = "Vertical split" })
 vim.keymap.set( 'n', '<leader>rn', vim.lsp.buf.rename, { silent = true, desc = "[R]e[n]ame"})
 
+-- window switching
+vim.keymap.set( 'n', '<C-h>', [[<C-W>h]], { silent = true, desc = "Switch windows left"})
+vim.keymap.set( 'n', '<C-j>', [[<C-W>j]], { silent = true, desc = "Switch windows down"})
+vim.keymap.set( 'n', '<C-k>', [[<C-W>k]], { silent = true, desc = "Switch windows up"})
+vim.keymap.set( 'n', '<C-l>', [[<C-W>l]], { silent = true, desc = "Switch windows right"})
+-- window switching, even in terminals
 vim.keymap.set( 't', '<C-h>', [[<C-\><C-n><C-W>h]], { silent = true, desc = "Switch windows left"})
 vim.keymap.set( 't', '<C-j>', [[<C-\><C-n><C-W>j]], { silent = true, desc = "Switch windows down"})
 vim.keymap.set( 't', '<C-k>', [[<C-\><C-n><C-W>k]], { silent = true, desc = "Switch windows up"})
 vim.keymap.set( 't', '<C-l>', [[<C-\><C-n><C-W>l]], { silent = true, desc = "Switch windows right"})
 
-vim.keymap.set( 'n', '<C-h>', [[<C-W>h]], { silent = true, desc = "Switch windows left"})
-vim.keymap.set( 'n', '<C-j>', [[<C-W>j]], { silent = true, desc = "Switch windows down"})
-vim.keymap.set( 'n', '<C-k>', [[<C-W>k]], { silent = true, desc = "Switch windows up"})
-vim.keymap.set( 'n', '<C-l>', [[<C-W>l]], { silent = true, desc = "Switch windows right"})
+if not vim.fn.has("macos") then
+  -- this is used to switch workspaces in macOS, so not compatible
+  -- window switching with ctrl+arrow
+  vim.keymap.set( 'n', '<C-left>', [[<C-W>h]], { silent = true, desc = "Switch windows left"})
+  vim.keymap.set( 'n', '<C-down>', [[<C-W>j]], { silent = true, desc = "Switch windows down"})
+  vim.keymap.set( 'n', '<C-up>', [[<C-W>k]], { silent = true, desc = "Switch windows up"})
+  vim.keymap.set( 'n', '<C-right>', [[<C-W>l]], { silent = true, desc = "Switch windows right"})
+  -- window switching with ctrl+arrow, even in terminals
+  vim.keymap.set( 't', '<C-left>', [[<C-\><C-n><C-W>h]], { silent = true, desc = "Switch windows left"})
+  vim.keymap.set( 't', '<C-down>', [[<C-\><C-n><C-W>j]], { silent = true, desc = "Switch windows down"})
+  vim.keymap.set( 't', '<C-up>', [[<C-\><C-n><C-W>k]], { silent = true, desc = "Switch windows up"})
+  vim.keymap.set( 't', '<C-right>', [[<C-\><C-n><C-W>l]], { silent = true, desc = "Switch windows right"})
+end
+
 
 -- previews
 vim.keymap.set( 'n', '<leader>p', '', { silent = true, desc = "[P]review" })
@@ -52,7 +85,7 @@ vim.keymap.set( 'n', '<leader>pc', preview.close_all_win, { silent = true, desc 
 
 -- lsp
 vim.keymap.set( 'n', '<leader>l', '', { silent = true, desc = "LSP"})
-vim.keymap.set( 'n', '<leader>lu', ':TSUpdate', { silent = true, desc = "Treesitter Update"})
+vim.keymap.set( 'n', '<leader>lu', ':TSUpdate<Enter>', { silent = true, desc = "Treesitter Update"})
 
 -- tab management
 vim.keymap.set( 'n', '<leader>.', '', { silent = true, desc = "Tab management"})
@@ -69,6 +102,8 @@ if vim.g.neovide and vim.fn.has("macos") then
   -- paste with cmd+V for macos, but only in insert mode.
   vim.api.nvim_set_keymap('!', '<D-v>', '<C-R>+', { noremap = true, silent = true })
 end
+
+
 
 vim.cmd([[
 nmap <F9> <cmd>call vimspector#Launch()<cr>
