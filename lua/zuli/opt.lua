@@ -5,6 +5,7 @@ vim.wo.number = true
 vim.opt.scrolloff = 10
 -- default length of tabbing in spaces
 vim.o.tabstop = 4
+vim.o.shiftwidth = 4
 -- auto-detect foldable syntax, instead of managing folds manually
 vim.wo.foldmethod = 'expr'
 vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
@@ -13,7 +14,7 @@ vim.o.hlsearch = false
 -- enable mouse
 vim.o.mouse = 'a'
 -- sync with OS clipboard
-vim.o.clipboard = 'unnamedplus' 
+vim.o.clipboard = 'unnamedplus'
 vim.o.breakindent = true
 -- allow undo
 vim.o.undofile = true
@@ -26,7 +27,7 @@ vim.wo.signcolumn = 'yes'
 vim.o.updatetime = 250
 vim.o.timeoutlen = 300
 -- completion options
--- vim.o.completeopt = 'menuone,noselect'
+-- vim.o.completeopt = 'menuone,noinsert,noselect'
 vim.o.completeopt = 'preview'
 vim.o.termguicolors = true
 
