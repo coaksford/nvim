@@ -1,6 +1,6 @@
 -- absolute and relative line numbers in gutter
-vim.wo.number = true
 vim.wo.relativenumber = true
+vim.wo.number = true
 -- keep the cursor x rows away from top or bottom
 vim.opt.scrolloff = 10
 -- default length of tabbing in spaces
