@@ -5,6 +5,14 @@ local preview = require('goto-preview')
 -- why hit shift to get into command mode?
 vim.keymap.set( 'n', ';', ':')
 
+-- ignore just a space
+vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+
+-- word wrap
+vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+
+
 -- drag a visual selection up and down with J and K
 vim.keymap.set( 'v', 'K', ":m '>+1<CR>gv=gv")
 vim.keymap.set( 'v', 'J', ":m '<-2<CR>gv=gv")
