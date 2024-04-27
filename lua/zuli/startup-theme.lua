@@ -80,7 +80,7 @@ local body = {
         --{ " Recent Files", "Telescope oldfiles", "<leader>r" },
         { " Search for Files", "Telescope find_files", "<leader>sf" },
         { " Search by grep", "Telescope live_grep", "<leader>sg" },
-        { " File sidebar", "NvimTreeToggle", "<leader>o" },
+        { " File sidebar", "NvimTreeToggle", "<leader>th" },
         { " Colorschemes", "Telescope colorscheme", "<leader>cs" },
     },
     highlight = "String",

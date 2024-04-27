@@ -26,8 +26,7 @@ vim.wo.signcolumn = 'yes'
 -- key combo timings in ms
 vim.o.updatetime = 250
 vim.o.timeoutlen = 300
--- completion options
--- vim.o.completeopt = 'menuone,noinsert,noselect'
-vim.o.completeopt = 'preview'
+
 vim.o.termguicolors = true
+
 

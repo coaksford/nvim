@@ -5,9 +5,6 @@ local preview = require('goto-preview')
 -- why hit shift to get into command mode?
 vim.keymap.set( 'n', ';', ':')
 
--- ignore just a space
-vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-
 -- word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
@@ -24,7 +21,8 @@ vim.keymap.set( 'n', '<leader>sf', require('telescope.builtin').find_files, { de
 vim.keymap.set( 'n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set( 'n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set( 'n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
-vim.keymap.set( 'n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
+vim.keymap.set( 'n', '<leader>se', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
+vim.keymap.set( 'n', '<leader>ee', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set( 'n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
 vim.keymap.set( 'n', '<leader>sb', ts.buffers, { desc = "[S]earch [B]uffers" })
 vim.keymap.set( 'n', '<leader>sp', tsproj.projects, { desc = "[S]earch [P]rojects" })
@@ -42,6 +40,13 @@ vim.keymap.set( 'n', '<leader>rv', ':vertical resize +', { silent = true, desc =
 vim.keymap.set( 'n', '<leader>rV', ':vertical resize -', { silent = true, desc = "[R]esize [V]ertical split -" })
 vim.keymap.set( 'n', '<leader>rh', ':resize +', { silent = true, desc = "[R]esize [h]orizantal split +" })
 vim.keymap.set( 'n', '<leader>rH', ':resize -', { silent = true, desc = "[R]esize [H]orizontal split -" })
+
+-- resize
+vim.keymap.set( 'n', '<C-K>', ':vertical resize +2', { silent = true, desc = "[R]esize [v]ertical split +" })
+vim.keymap.set( 'n', '<C-J>', ':vertical resize -2', { silent = true, desc = "[R]esize [V]ertical split -" })
+vim.keymap.set( 'n', '<C-L>', ':resize +2', { silent = true, desc = "[R]esize [h]orizantal split +" })
+vim.keymap.set( 'n', '<C-H>', ':resize -2', { silent = true, desc = "[R]esize [H]orizontal split -" })
+
 
 -- toggleterm
 vim.keymap.set( 'n', '<leader>tt', ':ToggleTerm size=80 direction=float<Enter>', { silent = true, desc = "[T]oggle[T]erm centered" })
@@ -90,6 +95,21 @@ vim.keymap.set( 'n', '<leader>pi', preview.goto_preview_implementation, { silent
 vim.keymap.set( 'n', '<leader>pr', preview.goto_preview_references, { silent = true, desc = "[P]review [R]eferences" })
 vim.keymap.set( 'n', '<leader>pc', preview.close_all_win, { silent = true, desc = "[P]review [C]lose" })
 
+vim.keymap.set( 'n', 'gd', vim.lsp.buf.definition, { silent = true, desc = "[G]oto [D]efinition" })
+vim.keymap.set( 'n', 'gr', require('telescope.builtin').lsp_references, { silent = true, desc = '[G]oto [R]eferences'})
+vim.keymap.set( 'n', 'gI', require('telescope.builtin').lsp_implementations, { silent = true, desc = '[G]oto [I]mplementation'})
+vim.keymap.set( 'n', '<leader>D', vim.lsp.buf.type_definition, { silent = true, desc = 'Type [D]efinition'})
+vim.keymap.set( 'n', '<leader>ds', require('telescope.builtin').lsp_document_symbols, { silent = true, desc = '[D]ocument [S]ymbols'})
+vim.keymap.set( 'n', '<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, { silent = true, desc = '[W]orkspace [S]ymbols'})
+
+
+  -- Lesser used LSP functionality
+vim.keymap.set( 'n', 'gD', vim.lsp.buf.declaration, { silent = true, desc = '[G]oto [D]eclaration'})
+vim.keymap.set( 'n', '<leader>wa', vim.lsp.buf.add_workspace_folder, { silent = true, desc = '[W]orkspace [A]dd Folder'})
+vim.keymap.set( 'n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, { silent = true, desc = '[W]orkspace [R]emoveFolder'})
+vim.keymap.set( 'n', '<leader>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, { desc = '[W]orkspace [L]ist Folders'})
+
+
 -- lsp
 vim.keymap.set( 'n', '<leader>l', '', { silent = true, desc = "LSP"})
 vim.keymap.set( 'n', '<leader>lu', ':TSUpdate<Enter>', { silent = true, desc = "Treesitter Update"})
@@ -123,4 +143,8 @@ nmap <F10> <cmd>call vimspector#StepInto()<cr>")
 -- map('n', "Db", ":call vimspector#ToggleBreakpoint()<cr>")
 -- map('n', "Dw", ":call vimspector#AddWatch()<cr>")
 -- map('n', "De", ":call vimspector#Evaluate()<cr>")
+
+vim.keymap.set( 'n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
+vim.keymap.set( 'n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
+vim.keymap.set( 'n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
