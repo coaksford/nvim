@@ -113,6 +113,7 @@ vim.keymap.set( 'n', '<leader>wl', function() print(vim.inspect(vim.lsp.buf.list
 -- lsp
 vim.keymap.set( 'n', '<leader>l', '', { silent = true, desc = "LSP"})
 vim.keymap.set( 'n', '<leader>lu', ':TSUpdate<Enter>', { silent = true, desc = "Treesitter Update"})
+vim.keymap.set( 'n', '<leader>li', ':LspInfo<Enter>', { silent = true, desc = "LSP Info"})
 
 -- tab management
 vim.keymap.set( 'n', '<leader>.', '', { silent = true, desc = "Tab management"})
