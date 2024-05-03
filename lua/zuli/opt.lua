@@ -29,4 +29,8 @@ vim.o.timeoutlen = 300
 
 vim.o.termguicolors = true
 
+vim.wo.wrap = false
 
+-- Shortening of messages
+vim.opt.shortmess = vim.opt.shortmess + { c = true}
+vim.api.nvim_set_option('updatetime', 300)

@@ -1,18 +1,18 @@
 -- Setup neovim lua configuration
 require('zuli.opt')
-require('zuli.telescope')
+require('zuli.search')
 require('zuli.lsp')
 require('zuli.completion')
-require('zuli.rust')
 require('zuli.neovide')
-require('zuli.remap')
+require('zuli.keymap')
 require('zuli.terminal')
 require('zuli.nvim-tree')
 require('zuli.colors')
+require('zuli.layout')
+require('zuli.debug')
 
 
 
 -- require("startup").setup({theme = "dashboard"})
-
 
 

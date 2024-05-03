@@ -1,0 +1,5 @@
+vim.cmd("let g:lens#disabled_filetypes = ['nerdtree', 'fzf']")
+vim.cmd("let g:lens#height_resize_max = 20")
+vim.cmd("let g:lens#height_resize_min = 5")
+vim.cmd("let g:lens#width_resize_max = 100")
+vim.cmd("let g:lens#width_resize_min = 20")
