@@ -5,7 +5,7 @@ require("focus").setup({
         enable = true, -- Enable or disable auto-resizing of splits
         -- width = 100, -- Force width for the focused window
         -- height = 0, -- Force height for the focused window
-        minwidth = 15, -- Force minimum width for the unfocused window
+        minwidth = 30, -- Force minimum width for the unfocused window
         minheight = 5, -- Force minimum height for the unfocused window
         height_quickfix = 10, -- Set the height of quickfix panel
     },
@@ -31,7 +31,7 @@ require("focus").setup({
 })
 
 -- Don't adjust layout to certian window and buffer types
-local ignore_filetypes = { 'neo-tree', 'NvimTree' }
+local ignore_filetypes = { 'NvimTree', 'toggleterm' }
 local ignore_buftypes = { 'nofile', 'prompt', 'popup' }
 local augroup =
     vim.api.nvim_create_augroup('FocusDisable', { clear = true })
