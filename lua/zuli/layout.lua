@@ -31,8 +31,8 @@ require("focus").setup({
 })
 
 -- Don't adjust layout to certian window and buffer types
-local ignore_filetypes = { 'NvimTree', 'toggleterm' }
-local ignore_buftypes = { 'nofile', 'prompt', 'popup' }
+local ignore_filetypes = { 'NvimTree', 'toggleterm', 'undotree' }
+local ignore_buftypes = { 'nofile', 'prompt', 'popup', 'nowrite' }
 local augroup =
     vim.api.nvim_create_augroup('FocusDisable', { clear = true })
 vim.api.nvim_create_autocmd('WinEnter', {
