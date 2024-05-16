@@ -1,4 +1,4 @@
 return {
   {'akinsho/toggleterm.nvim', version = "*", config = true},
-  { 'nvim-focus/focus.nvim', version = '*' },
+  -- { 'nvim-focus/focus.nvim', version = '*' },
 }
