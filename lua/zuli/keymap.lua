@@ -5,6 +5,12 @@ local preview = require('goto-preview')
 -- why hit shift to get into command mode?
 vim.keymap.set( 'n', ';', ':')
 
+-- Disable horizontal scrolling with mouse 
+vim.keymap.set('n', '<ScrollWheelRight>', "<Nop>", { silent = true })
+vim.keymap.set('n', '<ScrollWheelLeft>', "<Nop>", { silent = true })
+vim.keymap.set('n', '<S-ScrollWheelDown>', "<ScrollWheelRight>", { silent = true })
+vim.keymap.set('n', '<S-ScrollWheelUp>', "<ScrollWheelLeft>", { silent = true })
+
 -- word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
@@ -103,7 +109,7 @@ vim.keymap.set( 'n', '<leader>ds', require('telescope.builtin').lsp_document_sym
 vim.keymap.set( 'n', '<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, { silent = true, desc = '[W]orkspace [S]ymbols'})
 
 
-  -- Lesser used LSP functionality
+-- Lesser used LSP functionality
 vim.keymap.set( 'n', 'gD', vim.lsp.buf.declaration, { silent = true, desc = '[G]oto [D]eclaration'})
 vim.keymap.set( 'n', '<leader>wa', vim.lsp.buf.add_workspace_folder, { silent = true, desc = '[W]orkspace [A]dd Folder'})
 vim.keymap.set( 'n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, { silent = true, desc = '[W]orkspace [R]emoveFolder'})
@@ -113,7 +119,8 @@ vim.keymap.set( 'n', '<leader>wl', function() print(vim.inspect(vim.lsp.buf.list
 -- lsp
 vim.keymap.set( 'n', '<leader>l', '', { silent = true, desc = "LSP"})
 vim.keymap.set( 'n', '<leader>lu', ':TSUpdate<Enter>', { silent = true, desc = "Treesitter Update"})
-vim.keymap.set( 'n', '<leader>li', ':LspInfo<Enter>', { silent = true, desc = "LSP Info"})
+vim.keymap.set( 'n', '<leader>ls', ':LspInfo<Enter>', { silent = true, desc = "[L]SP Info ([S]tatus)"})
+vim.keymap.set( 'n', '<leader>li', function() if vim.lsp.inlay_hint then vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end end, { silent = true, desc = "toggle [L]SP [I]nlay Hints"})
 
 -- tab management
 vim.keymap.set( 'n', '<leader>.', '', { silent = true, desc = "Tab management"})
