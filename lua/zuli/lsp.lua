@@ -122,3 +122,8 @@ set signcolumn=yes
 autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
 ]])
 
+-- Enable inlays by default
+if vim.lsp.inlay_hint then
+  vim.lsp.inlay_hint.enable(true)
+end
+
