@@ -121,6 +121,7 @@ vim.keymap.set( 'n', '<leader>l', '', { silent = true, desc = "LSP"})
 vim.keymap.set( 'n', '<leader>lu', ':TSUpdate<Enter>', { silent = true, desc = "Treesitter Update"})
 vim.keymap.set( 'n', '<leader>ls', ':LspInfo<Enter>', { silent = true, desc = "[L]SP Info ([S]tatus)"})
 vim.keymap.set( 'n', '<leader>li', function() if vim.lsp.inlay_hint then vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end end, { silent = true, desc = "toggle [L]SP [I]nlay Hints"})
+vim.keymap.set( 'n', '<leader>ca', function() vim.lsp.buf.code_action({apply=true}) end, { silent = true, desc = "[C]ode [A]ction"})
 
 -- tab management
 vim.keymap.set( 'n', '<leader>.', '', { silent = true, desc = "Tab management"})
