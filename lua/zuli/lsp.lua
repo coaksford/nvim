@@ -78,7 +78,17 @@ require('neodev').setup()
 
 local rt = require("rust-tools")
 
+local tools = {}
+tools.inlay_hints = {}
+
+if vim.g.neovide then
+  tools.inlay_hints.only_current_line = true
+else
+  tools.inlay_hints.auto = true
+end
+
 rt.setup({
+  tools = tools,
   server = {
     on_attach = function(_, bufnr)
       -- Hover actions
