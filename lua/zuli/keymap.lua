@@ -15,7 +15,6 @@ vim.keymap.set('n', '<S-ScrollWheelUp>', "<ScrollWheelLeft>", { silent = true })
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
-
 -- drag a visual selection up and down with J and K
 vim.keymap.set( 'v', 'K', ":m '>+1<CR>gv=gv")
 vim.keymap.set( 'v', 'J', ":m '<-2<CR>gv=gv")
@@ -35,11 +34,17 @@ vim.keymap.set( 'n', '<leader>sp', tsproj.projects, { desc = "[S]earch [P]roject
 vim.keymap.set( 'n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
 vim.keymap.set( 'n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
 vim.keymap.set( 'n', '<leader>f', function()
+  require('telescope.builtin').live_grep(require('telescope.themes').get_dropdown {
+    winblend = 30, -- 70% opacity
+    previewer = true, -- show the context of the highlighted option
+  })
+end, { desc = '[fg] Fuzzily grep' })
+vim.keymap.set( 'n', '<leader>F', function()
   require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
     winblend = 30, -- 70% opacity
     previewer = true, -- show the context of the highlighted option
   })
-end, { desc = '[f] Fuzzily search in current buffer' })
+end, { desc = '[fb] Fuzzily search in current buffer' })
 
 -- resize, provide distance and then enter
 vim.keymap.set( 'n', '<leader>rv', ':vertical resize +', { silent = true, desc = "[R]esize [v]ertical split +" })
