@@ -37,7 +37,11 @@ local servers = {
   clangd = {},
   gopls = {},
   pyright = {}, -- requires nodejs
-  rust_analyzer = {},
+  rust_analyzer = {
+    checkOnSave = {
+      enable = false,
+    }
+  },
   -- tsserver = {},
   html = { filetypes = { 'html', 'twig', 'hbs'} }, --requires nodejs
 
