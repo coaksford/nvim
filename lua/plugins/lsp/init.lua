@@ -89,4 +89,5 @@ return {
     },
     build = ':TSUpdate',
   },
+  {'nvim-treesitter/nvim-treesitter-context'},
 }
