@@ -148,6 +148,26 @@ set signcolumn=yes
 autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
 ]])
 
+require('lspconfig').rust_analyzer.setup{
+  cmd = {os.getenv("HOME") .. "/.nix-profile/bin/rust-analyzer"},
+}
+
+require('lspconfig').lua_ls.setup{
+  cmd = {os.getenv("HOME") .. "/.nix-profile/bin/lua-language-server"},
+}
+
+require('lspconfig').clangd.setup{
+  cmd = {os.getenv("HOME") .. "/.nix-profile/bin/clangd"},
+}
+
+require('lspconfig').gopls.setup{
+  cmd = {os.getenv("HOME") .. "/.nix-profile/bin/gopls"},
+}
+
+require('lspconfig').hls.setup{
+  cmd = {os.getenv("HOME") .. "/.nix-profile/bin/haskell-language-server-wrapper"},
+}
+
 -- Enable inlays by default
 if vim.lsp.inlay_hint then
   vim.lsp.inlay_hint.enable(true)
