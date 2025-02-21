@@ -7,4 +7,5 @@ return {
     priority = 1000,
     opts = {},
   },
+  { 'xiyaowong/transparent.nvim' },
 }
