@@ -148,6 +148,36 @@ set signcolumn=yes
 autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
 ]])
 
+function is_nixos()
+  local os_release_fd = assert(io.open("/etc/os-release"), "r")
+  local os_release = os_release_fd:read("*a")
+  os_release_fd:close()
+  local nixos = string.find(os_release, "nixos") ~= nil
+  return nixos
+end
+
+if is_nixos() then
+  require('lspconfig').rust_analyzer.setup{
+    cmd = {os.getenv("HOME") .. "/.nix-profile/bin/rust-analyzer"},
+  }
+
+  require('lspconfig').lua_ls.setup{
+    cmd = {os.getenv("HOME") .. "/.nix-profile/bin/lua-language-server"},
+  }
+
+  require('lspconfig').clangd.setup{
+    cmd = {os.getenv("HOME") .. "/.nix-profile/bin/clangd"},
+  }
+
+  require('lspconfig').gopls.setup{
+    cmd = {os.getenv("HOME") .. "/.nix-profile/bin/gopls"},
+  }
+
+  require('lspconfig').hls.setup{
+    cmd = {os.getenv("HOME") .. "/.nix-profile/bin/haskell-language-server-wrapper"},
+  }
+end
+
 -- Enable inlays by default
 if vim.lsp.inlay_hint then
   vim.lsp.inlay_hint.enable(true)
