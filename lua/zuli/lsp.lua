@@ -149,6 +149,9 @@ autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
 ]])
 
 function is_nixos()
+  if vim.loop.os_uname().sysname ~= "Linux" then
+    return false
+  end
   local os_release_fd = assert(io.open("/etc/os-release"), "r")
   local os_release = os_release_fd:read("*a")
   os_release_fd:close()
