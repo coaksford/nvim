@@ -1,4 +1,5 @@
 return {
+  { 'folke/which-key.nvim', opts = {} },
   'tpope/vim-sleuth', -- autodetect tabstop, shiftwidth
   { 'numToStr/Comment.nvim', opts = {} }, -- "gc" to comment
   {

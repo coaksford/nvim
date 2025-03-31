@@ -1,5 +1,4 @@
 return {
-  { 'folke/which-key.nvim', opts = {} }, --seems to go here?
   {
     'hrsh7th/nvim-cmp',
     dependencies = {
