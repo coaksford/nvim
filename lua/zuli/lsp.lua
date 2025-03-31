@@ -68,9 +68,10 @@ local servers = {
   },
 }
 
--- nvim-cmp supports additional completion capabilities, so broadcast that to servers
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+-- add blink's capabilites to the default nvim capabilities when telling an LSP what we can handle
+local capabilities = require('blink.cmp').get_lsp_capabilities(
+  vim.lsp.protocol.make_client_capabilities()
+)
 
 -- Ensure the servers above are installed
 local mason_lspconfig = require 'mason-lspconfig'
