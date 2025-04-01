@@ -1,75 +1,25 @@
--- See `:help cmp`
--- local cmp = require 'cmp'
--- local types = require 'cmp.types'
--- local luasnip = require 'luasnip'
--- require('luasnip.loaders.from_vscode').lazy_load()
--- luasnip.config.setup {}
+local blink = require('blink.cmp')
+blink.setup({
+  -- See :h blink-cmp-config-keymap for defining your own keymap
+  keymap = {
+    preset = 'none', -- unmap everything first
+    ['<Tab>'] = {'accept', 'fallback'},
+    ['<Down>'] = {'select_next', 'fallback'},
+    ['<Up>'] = {'select_prev', 'fallback'},
+    ['<Right>'] = {'show_documentation', 'fallback'},
+    ['<Left>'] = {'cancel', 'fallback'},
+  },
 
--- cmp.setup {
---   pveselect = types.cmp.PreselectMode.None,
---   completion = {
---     -- autocomplete = false,
---     completeopt = 'menu,menuone,noinsert,noselect',
---   },
---   snippet = {
---     expand = function(args)
---       luasnip.lsp_expand(args.body)
---     end,
---   },
---   mapping = cmp.mapping.preset.insert {
---     -- ['<C-n>'] = cmp.mapping.select_next_item(),
---     -- ['<C-x>'] = cmp.mapping.select_next_item(),
---     -- ['<C-f>'] = cmp.mapping.select_prev_item(),
---     -- ['<CR>'] = cmp.mapping.complete {},
---     ['<C-l>'] = cmp.mapping.confirm {
---       behavior = cmp.ConfirmBehavior.Replace,
---       -- select = true,
---     },
---     ['<C-j>'] = cmp.mapping(function(fallback)
---       if cmp.visible() then
---         cmp.select_next_item()
---       elseif luasnip.expand_or_locally_jumpable() then
---         luasnip.expand_or_jump()
---       else
---         fallback()
---       end
---     end, { 'i', 's' }),
---     ['<C-k>'] = cmp.mapping(function(fallback)
---       if cmp.visible() then
---         cmp.select_prev_item()
---       elseif luasnip.locally_jumpable(-1) then
---         luasnip.jump(-1)
---       else
---         fallback()
---       end
---     end, { 'i', 's' }),
---   },
---   sources = {
---     { name = 'path' },                              -- file paths
---     { name = 'nvim_lsp', keyword_length = 3 },      -- from language server
---     { name = 'nvim_lsp_signature_help'},            -- display function signatures with current parameter emphasized
---     { name = 'nvim_lua', keyword_length = 2},       -- complete neovim's Lua runtime API such vim.lsp.*
---     { name = 'buffer', keyword_length = 2 },        -- source current buffer
---     { name = 'vsnip', keyword_length = 2 },         -- nvim-cmp source for vim-vsnip 
---     { name = 'calc'},                               -- source for math calculation
---     { name = 'luasnip' },
---   },
---   window = {
---       completion = cmp.config.window.bordered(),
---       documentation = cmp.config.window.bordered(),
---   },
---   formatting = {
---       fields = {'menu', 'abbr', 'kind'},
---       format = function(entry, item)
---           local menu_icon ={
---               nvim_lsp = 'λ',
---               vsnip = '⋗',
---               buffer = 'Ω',
---               path = '🖫',
---           }
---           item.menu = menu_icon[entry.source.name]
---           return item
---       end,
---   },
--- }
+  appearance = {
+    nerd_font_variant = 'mono' -- Adjusts spacing to ensure icons are aligned
+  },
 
+  -- (Default) Only show the documentation popup when manually triggered
+  completion = { documentation = { auto_show = false } },
+
+  sources = {
+    default = { 'lsp', 'path', 'snippets', 'buffer' },
+  },
+
+  fuzzy = { implementation = "prefer_rust_with_warning" }
+})
