@@ -1,6 +1,11 @@
 local ts = require('telescope.builtin')
 local tsproj = require'telescope'.extensions.projects
 local preview = require('goto-preview')
+local tst = require('telescope.themes')
+local ts_dropdown_theme = tst.get_dropdown {
+  winblend = 30, -- 70% opacity
+  previewer = true, -- show the context of the highlighted option
+}
 
 -- why hit shift to get into command mode?
 vim.keymap.set( 'n', ';', ':')
@@ -22,29 +27,19 @@ vim.keymap.set( 'v', 'J', ":m '<-2<CR>gv=gv")
 -- search
 vim.keymap.set( 'n', '<leader>s', '', { silent = true, desc = "[S]earch" })
 vim.keymap.set( 'n', '<leader>ss', ts.builtin, { silent = true, desc = "[S]earch [S]omething" })
-vim.keymap.set( 'n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
-vim.keymap.set( 'n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
-vim.keymap.set( 'n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
-vim.keymap.set( 'n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
-vim.keymap.set( 'n', '<leader>se', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
+vim.keymap.set( 'n', '<leader>sf', ts.find_files, { desc = '[S]earch [F]iles' })
+vim.keymap.set( 'n', '<leader>sh', ts.help_tags, { desc = '[S]earch [H]elp' })
+vim.keymap.set( 'n', '<leader>sw', ts.grep_string, { desc = '[S]earch current [W]ord' })
+vim.keymap.set( 'n', '<leader>sg', ts.live_grep, { desc = '[S]earch by [G]rep' })
+vim.keymap.set( 'n', '<leader>se', ts.diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set( 'n', '<leader>ee', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-vim.keymap.set( 'n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
+vim.keymap.set( 'n', '<leader>sr', ts.resume, { desc = '[S]earch [R]esume' })
 vim.keymap.set( 'n', '<leader>sb', ts.buffers, { desc = "[S]earch [B]uffers" })
 vim.keymap.set( 'n', '<leader>sp', tsproj.projects, { desc = "[S]earch [P]rojects" })
-vim.keymap.set( 'n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
-vim.keymap.set( 'n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
-vim.keymap.set( 'n', '<leader>f', function()
-  require('telescope.builtin').live_grep(require('telescope.themes').get_dropdown {
-    winblend = 30, -- 70% opacity
-    previewer = true, -- show the context of the highlighted option
-  })
-end, { desc = '[fg] Fuzzily grep' })
-vim.keymap.set( 'n', '<leader>F', function()
-  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-    winblend = 30, -- 70% opacity
-    previewer = true, -- show the context of the highlighted option
-  })
-end, { desc = '[fb] Fuzzily search in current buffer' })
+vim.keymap.set( 'n', '<leader><space>', ts.buffers, { desc = '[ ] Find existing buffers' })
+vim.keymap.set( 'n', '<leader>?', ts.oldfiles, { desc = '[?] Find recently opened files' })
+vim.keymap.set( 'n', '<leader>f', function() ts.live_grep(ts_dropdown_theme) end, { desc = '[fg] Fuzzily grep' })
+vim.keymap.set( 'n', '<leader>F', function() ts.current_buffer_fuzzy_find(ts_dropdown_theme) end, { desc = '[fb] Fuzzily search in current buffer' })
 
 -- resize, provide distance and then enter
 vim.keymap.set( 'n', '<leader>rv', ':vertical resize +', { silent = true, desc = "[R]esize [v]ertical split +" })
@@ -67,10 +62,9 @@ vim.keymap.set( 'n', '<leader>ts', ':ToggleTerm size=80 direction=vertical<Enter
 vim.keymap.set( 'n', '<leader>th', ':NvimTreeToggle<Enter>', { silent = true })
 vim.keymap.set( 'n', '<leader>tc', ':split<Enter>', { silent = true, desc = "Horizontal split" })
 vim.keymap.set( 'n', '<leader>tn', ':vsplit<Enter>', { silent = true, desc = "Vertical split" })
-
 vim.keymap.set( 'n', '_', ':split<Enter>', { silent = true, desc = "Horizontal split" })
 vim.keymap.set( 'n', '|', ':vsplit<Enter>', { silent = true, desc = "Vertical split" })
-vim.keymap.set( 'n', '<leader>rn', vim.lsp.buf.rename, { silent = true, desc = "[R]e[n]ame"})
+
 
 -- window switching
 vim.keymap.set( 'n', '<C-h>', [[<C-W>h]], { silent = true, desc = "Switch windows left"})
@@ -107,11 +101,11 @@ vim.keymap.set( 'n', '<leader>pr', preview.goto_preview_references, { silent = t
 vim.keymap.set( 'n', '<leader>pc', preview.close_all_win, { silent = true, desc = "[P]review [C]lose" })
 
 vim.keymap.set( 'n', 'gd', vim.lsp.buf.definition, { silent = true, desc = "[G]oto [D]efinition" })
-vim.keymap.set( 'n', 'gr', require('telescope.builtin').lsp_references, { silent = true, desc = '[G]oto [R]eferences'})
-vim.keymap.set( 'n', 'gI', require('telescope.builtin').lsp_implementations, { silent = true, desc = '[G]oto [I]mplementation'})
+vim.keymap.set( 'n', 'gr', ts.lsp_references, { silent = true, desc = '[G]oto [R]eferences'})
+vim.keymap.set( 'n', 'gI', ts.lsp_implementations, { silent = true, desc = '[G]oto [I]mplementation'})
 vim.keymap.set( 'n', '<leader>D', vim.lsp.buf.type_definition, { silent = true, desc = 'Type [D]efinition'})
-vim.keymap.set( 'n', '<leader>ds', require('telescope.builtin').lsp_document_symbols, { silent = true, desc = '[D]ocument [S]ymbols'})
-vim.keymap.set( 'n', '<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, { silent = true, desc = '[W]orkspace [S]ymbols'})
+vim.keymap.set( 'n', '<leader>ds', ts.lsp_document_symbols, { silent = true, desc = '[D]ocument [S]ymbols'})
+vim.keymap.set( 'n', '<leader>ws', ts.lsp_dynamic_workspace_symbols, { silent = true, desc = '[W]orkspace [S]ymbols'})
 
 
 -- Lesser used LSP functionality
@@ -127,6 +121,7 @@ vim.keymap.set( 'n', '<leader>lu', ':TSUpdate<Enter>', { silent = true, desc = "
 vim.keymap.set( 'n', '<leader>ls', ':LspInfo<Enter>', { silent = true, desc = "[L]SP Info ([S]tatus)"})
 vim.keymap.set( 'n', '<leader>li', function() if vim.lsp.inlay_hint then vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end end, { silent = true, desc = "toggle [L]SP [I]nlay Hints"})
 vim.keymap.set( 'n', '<leader>ca', function() vim.lsp.buf.code_action({apply=true}) end, { silent = true, desc = "[C]ode [A]ction"})
+vim.keymap.set( 'n', '<leader>rn', vim.lsp.buf.rename, { silent = true, desc = "[R]e[n]ame"})
 
 -- tab management
 vim.keymap.set( 'n', '<leader>.', '', { silent = true, desc = "Tab management"})
@@ -144,8 +139,6 @@ if vim.g.neovide and vim.fn.has("macos") then
   vim.api.nvim_set_keymap('!', '<D-v>', '<C-R>+', { noremap = true, silent = true })
 end
 
-
-
 vim.cmd([[
 nmap <F9> <cmd>call vimspector#Launch()<cr>
 nmap <F5> <cmd>call vimspector#StepOver()<cr>
@@ -158,7 +151,5 @@ nmap <F10> <cmd>call vimspector#StepInto()<cr>")
 -- map('n', "Dw", ":call vimspector#AddWatch()<cr>")
 -- map('n', "De", ":call vimspector#Evaluate()<cr>")
 
-vim.keymap.set( 'n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
-vim.keymap.set( 'n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
-vim.keymap.set( 'n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+vim.keymap.set( 'n', '<leader>dl', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
