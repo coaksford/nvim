@@ -1,4 +1,4 @@
--- slightly modified from example at https://cmp.saghen.dev/installation
+-- modified from example at https://cmp.saghen.dev/installation
 return {
   'saghen/blink.cmp',
   dependencies = { 'rafamadriz/friendly-snippets' },

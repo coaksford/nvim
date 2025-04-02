@@ -1,4 +1,5 @@
 return {
+  -- gives a startup screen
   {
     "startup-nvim/startup.nvim",
     dependencies = {
@@ -9,6 +10,7 @@ return {
       require("startup").setup(require("zuli.startup-theme"))
     end
   },
+  -- creates a project list, remembering repos you've been to
   {
     "ahmedkhalf/project.nvim",
     config = function()

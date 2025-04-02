@@ -1,6 +1,9 @@
 return {
+  -- Similar to VScode, customized.
   { 'coaksford/nvim-theme' },
+  -- Similar to VScode
   { 'tomasiser/vim-code-dark' },
+  -- Dim, purple-heavy
   {
     "folke/tokyonight.nvim",
     lazy = false,

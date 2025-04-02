@@ -1,4 +1,5 @@
 return {
+  -- File browser, usually for the left sidebar.
   {
     "nvim-tree/nvim-tree.lua",
     version = "*",

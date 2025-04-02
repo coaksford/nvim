@@ -37,7 +37,7 @@ local function zuli_header()
         "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠀⠠⠈⠠⠀⠅⠂⠩⠲⡨⢄⠕⡏⡂⠁⠄⠂⡈⠄⠐⡀⡐⠨⢐⠨⠀⠂⠁⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
         "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠁⠀⠁⠂⠐⠀⡂⠨⠀⠊⢂⠊⡐⢐⠠⠁⠂⠄⠁⠀⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
         "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠀⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
-   }
+    }
 end
 
 local logo = {
@@ -77,7 +77,7 @@ local body = {
     content = {
         { " New File", "lua require'startup'.new_file()", "<leader>n" },
         { " Recent Projects", "Telescope projects", "<leader>sp" },
-        --{ " Recent Files", "Telescope oldfiles", "<leader>r" },
+        { " Recent Files", "Telescope oldfiles", "<leader>r" },
         { " Search for Files", "Telescope find_files", "<leader>sf" },
         { " Search by grep", "Telescope live_grep", "<leader>sg" },
         { " File sidebar", "NvimTreeToggle", "<leader>th" },
@@ -85,7 +85,7 @@ local body = {
     },
     highlight = "String",
     default_color = "",
-    oldfiles_amount = 0,
+    oldfiles_amount = 5,
 }
 
 

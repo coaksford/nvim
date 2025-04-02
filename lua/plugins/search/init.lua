@@ -1,4 +1,5 @@
 return {
+  -- UI elements for searching
   {
     'nvim-telescope/telescope.nvim',
     branch = '0.1.x',
