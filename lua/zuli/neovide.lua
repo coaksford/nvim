@@ -1,5 +1,5 @@
 if vim.g.neovide then
-    vim.o.guifont = "CaskaydiaCove Nerd Font Mono"
+    vim.o.guifont = "Mononoki Nerd Font,CaskaydiaCove Nerd Font Mono"
 
     if vim.fn.has("macos") then
         vim.g.neovide_scale_factor = 1.0
