@@ -13,6 +13,6 @@ if vim.g.neovide then
     vim.keymap.set( 'n', '<leader>V', function() vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1 end, { desc = 'Increase Neovide scale' })
     vim.keymap.set( 'n', '<leader>v', function() vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1 end, { desc = 'Decrease Neovide scale' })
 
-    vim.g.neovide_transparency = 0.9
+    vim.g.neovide_opacity = 0.9
 end
 
