@@ -107,6 +107,7 @@ map( 'n', '<leader>ls', ':LspInfo<Enter>', { silent = true, desc = "[L]SP Info (
 map( 'n', '<leader>li', function() if vim.lsp.inlay_hint then vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end end, { silent = true, desc = "toggle [L]SP [I]nlay Hints"})
 map( 'n', '<leader>ca', function() vim.lsp.buf.code_action({apply=true}) end, { silent = true, desc = "[C]ode [A]ction"})
 map( 'n', '<leader>rn', vim.lsp.buf.rename, { silent = true, desc = "[R]e[n]ame"})
+map( 'n', '<leader>lt', ':lua Toggle_LSP()<Enter>', { silent = true, desc = "[L]SP [T]oggle"})
 
 -- tab management
 map( 'n', '<leader>.', '', { silent = true, desc = "Tab management"})

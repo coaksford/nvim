@@ -8,9 +8,4 @@ require('zuli.keymap')
 require('zuli.nvim-tree')
 require('zuli.colors')
 require('zuli.debug')
-
-
-
--- require("startup").setup({theme = "dashboard"})
-
-
+require('zuli.lsp-toggle')
