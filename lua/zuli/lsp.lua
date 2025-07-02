@@ -149,10 +149,21 @@ set signcolumn=yes
 autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
 ]])
 
-function is_nixos()
+-- Check whether this is a nix environment or not, either NixOS, or a nix-shell, nix develop shell,
+-- or something else similar enough to it that we need to not rely on system lsps and rely on nix
+-- store LSPs.
+function is_nix()
+  -- check if we're in a nix shell
+  if os.getenv("NIX_STORE") ~= "" then
+    return true
+  end
+
+  -- if not in a nix shell, and also not linux, it's not nixos
   if vim.loop.os_uname().sysname ~= "Linux" then
     return false
   end
+
+  -- if it is linux, then check if the os release is nixos
   local os_release_fd = assert(io.open("/etc/os-release"), "r")
   local os_release = os_release_fd:read("*a")
   os_release_fd:close()
@@ -160,7 +171,7 @@ function is_nixos()
   return nixos
 end
 
-if is_nixos() then
+if is_nix() then
   require('lspconfig').rust_analyzer.setup{
     cmd = {os.getenv("HOME") .. "/.nix-profile/bin/rust-analyzer"},
   }
