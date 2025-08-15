@@ -136,3 +136,4 @@ map( 'n', "De", ":call vimspector#Evaluate()<cr>", { silent = true, desc = "Eval
 
 map( 'n', '<leader>dl', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
+map( 'n', '<leader>g', ':Neogit<cr>', { silent = true, desc = "Neo[g]it" })
