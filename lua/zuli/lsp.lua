@@ -160,7 +160,8 @@ function is_nix()
   return nixos
 end
 
-if is_nix() then
+-- This may no longer be needed as of neovim 0.11+ and instead causes multiple LSPs to run at once.
+if is_nix() and false then
   require('lspconfig').rust_analyzer.setup{
     cmd = {os.getenv("HOME") .. "/.nix-profile/bin/rust-analyzer"},
   }
