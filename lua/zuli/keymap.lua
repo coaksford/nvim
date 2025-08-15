@@ -137,3 +137,15 @@ map( 'n', "De", ":call vimspector#Evaluate()<cr>", { silent = true, desc = "Eval
 map( 'n', '<leader>dl', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 map( 'n', '<leader>g', ':Neogit<cr>', { silent = true, desc = "Neo[g]it" })
+
+-- Obsidian related mappings
+map( 'n', '<leader>o', '', { silent = true, desc = "[O]bsidian" })
+map( 'n', '<leader>ob', ':ObsidianBacklinks<cr>', { silent = true, desc = "Show [B]acklinks" })
+map( 'n', '<leader>ol', ':ObsidianLinks<cr>', { silent = true, desc = "Show [L]inks" })
+map( 'n', '<leader>ot', ':ObsidianTags<cr>', { silent = true, desc = "[T]ags" })
+map( 'n', '<leader>o ', ':ObsidianToggleCheckbox<cr>', { silent = true, desc = "Toggle checkbox" })
+map( 'n', '<leader>oc', ':ObsidianTOC<cr>', { silent = true, desc = "Open table of [C]ontents" })
+map( 'n', '<leader>orn', ':ObsidianRename', { silent = true, desc = "[R]ename [N]ote" })
+map( 'n', '<leader>os', ':ObsidianQuickSwitch<cr>', { silent = true, desc = "[S]witch note" })
+map( 'n', '<leader>oo', ':ObsidianOpen<cr>', { silent = true, desc = "Open in Obsidian" })
+
