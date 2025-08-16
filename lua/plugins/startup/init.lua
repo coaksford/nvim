@@ -12,9 +12,9 @@ return {
   },
   -- creates a project list, remembering repos you've been to
   {
-    "ahmedkhalf/project.nvim",
+    "DrKJeff16/project.nvim",
     config = function()
-      require("project_nvim").setup {
+      require("project").setup {
         manual_mode = false,
         exclude_dirs = { "~/.cargo/*", },
         detection_methods = { "lsp", "pattern" },
