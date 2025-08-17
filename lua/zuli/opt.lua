@@ -34,5 +34,5 @@ vim.wo.wrap = false
 vim.opt.colorcolumn = "100"
 -- Shortening of messages
 vim.opt.shortmess = vim.opt.shortmess + { c = true}
-vim.api.nvim_set_option('updatetime', 300)
+-- allow concealing syntax characters in markdown files
 vim.opt.conceallevel = 2

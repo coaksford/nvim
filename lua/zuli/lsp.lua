@@ -148,7 +148,7 @@ function is_nix()
   end
 
   -- if not in a nix shell, and also not linux, it's not nixos
-  if vim.loop.os_uname().sysname ~= "Linux" then
+  if vim.uv.os_uname().sysname ~= "Linux" then
     return false
   end
 
