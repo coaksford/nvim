@@ -1,136 +1,66 @@
-
--- [[ Configure LSP ]]
---  This function gets run when an LSP connects to a particular buffer.
-local on_attach = function(_, bufnr)
-  local nmap = function(keys, func, desc)
-    if desc then
-      desc = 'LSP: ' .. desc
-    end
-
-    vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
-  end
-
-  nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-
-  -- Create a command `:Format` local to the LSP buffer
-  vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-    vim.lsp.buf.format()
-  end, { desc = 'Format current buffer with LSP' })
+-- which LSPs to install
+local lsps = { "clangd", "rust_analyzer", "gopls", "pyright", "html", "lua_ls" }
+for lsp in vim.iter(lsps) do
+  vim.lsp.enable(lsp)
 end
 
--- document existing key chains
-local wk = require('which-key')
-wk.add({
-  {'<leader>c', group = '[C]ode' },
-  {'<leader>d', group = '[D]ocument' },
-  {'<leader>g', group = '[G]it' },
-  {'<leader>h', group = 'More git' },
-  {'<leader>r', group = '[R]ename' },
-  {'<leader>s', group = '[S]earch' },
-  {'<leader>w', group = '[W]orkspace' },
+-- language-specific configuration
+vim.lsp.config("rust_analyzer", {
+  checkOnSave = {
+    enable = false,
+  }
 })
-
--- LSP
-require('mason').setup()
-require('mason-lspconfig').setup()
-
--- Ignore rust analyzer complaints
-for _, method in ipairs({ 'textDocument/diagnostic', 'workspace/diagnostic' }) do
-    local default_diagnostic_handler = vim.lsp.handlers[method]
-    vim.lsp.handlers[method] = function(err, result, context, config)
-        if err ~= nil and err.code == -32802 then
-            return
-        end
-        return default_diagnostic_handler(err, result, context, config)
-    end
-end
-
-local servers = {
-  clangd = {},
-  gopls = {},
-  pyright = {}, -- requires nodejs
-  rust_analyzer = {
-    checkOnSave = {
-      enable = false,
-    }
-  },
-  -- tsserver = {},
-  html = { filetypes = { 'html', 'twig', 'hbs'} }, --requires nodejs
-
-  lua_ls = {
-    Lua = {
-      workspace = { checkThirdParty = false },
-      telemetry = { enable = false },
-      diagnostics = {
-        globals = { "vim" }
-      },
+vim.lsp.config("html", { filetypes = { 'html', 'twig', 'hbs'} })
+vim.lsp.config("lua_ls", {
+  Lua = {
+    workspace = { checkThirdParty = false },
+    telemetry = { enable = false },
+    diagnostics = {
+      globals = { "vim" }
     },
   },
-}
+})
+
+-- package manager for LSPs and DAP adapters
+require('mason').setup()
+
+-- ignore rust analyzer complaints
+if false then
+  for _, method in ipairs({ 'textDocument/diagnostic', 'workspace/diagnostic' }) do
+    local default_diagnostic_handler = vim.lsp.handlers[method]
+    vim.lsp.handlers[method] = function(err, result, context, config)
+      if err ~= nil and err.code == -32802 then
+        return
+      end
+      return default_diagnostic_handler(err, result, context, config)
+    end
+  end
+end
 
 -- add blink's capabilites to the default nvim capabilities when telling an LSP what we can handle
 local capabilities = require('blink.cmp').get_lsp_capabilities(
   vim.lsp.protocol.make_client_capabilities()
 )
 
--- Ensure the servers above are installed
-local mason_lspconfig = require 'mason-lspconfig'
-
-mason_lspconfig.setup {
-  ensure_installed = vim.tbl_keys(servers),
-}
-
-require('neodev').setup()
-
-local rt = require("rust-tools")
-
-local tools = {}
-tools.inlay_hints = {}
-
-if vim.g.neovide then
-  tools.inlay_hints.only_current_line = true
-else
-  tools.inlay_hints.auto = true
-end
-
-rt.setup({
-  tools = tools,
-  server = {
-    on_attach = function(_, bufnr)
-      -- Hover actions
-      vim.keymap.set("n", "<Leader>ha", rt.hover_actions.hover_actions, { buffer = bufnr })
-      -- Code action groups
-      vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
-    end,
-  },
-})
-
--- LSP Diagnostics Options Setup 
-local sign = function(opts)
-  vim.fn.sign_define(opts.name, {
-    texthl = opts.name,
-    text = opts.text,
-    numhl = ''
-  })
-end
-
-sign({name = 'DiagnosticSignError', text = ''})
-sign({name = 'DiagnosticSignWarn', text = ''})
-sign({name = 'DiagnosticSignHint', text = '?'})
-sign({name = 'DiagnosticSignInfo', text = 'i'})
--- 
 vim.diagnostic.config({
-    virtual_text = false,
-    signs = true,
-    update_in_insert = true,
-    underline = true,
-    severity_sort = false,
-    float = {
-        border = 'rounded',
-        source = 'always',
-        header = '',
-        prefix = '',
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = '',
+      [vim.diagnostic.severity.WARN] = '',
+      [vim.diagnostic.severity.HINT] = '?',
+      [vim.diagnostic.severity.INFO] = 'i',
     },
+  },
+  virtual_text = false,
+  update_in_insert = true,
+  underline = true,
+  severity_sort = false,
+  float = {
+    border = 'rounded',
+    source = 'always',
+    header = '',
+    prefix = '',
+  },
 })
 
 vim.cmd([[
@@ -141,7 +71,7 @@ autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
 -- Check whether this is a nix environment or not, either NixOS, or a nix-shell, nix develop shell,
 -- or something else similar enough to it that we need to not rely on system lsps and rely on nix
 -- store LSPs.
-function is_nix()
+local function is_nix()
   -- check if we're in a nix shell
   if os.getenv("NIX_STORE") ~= "" then
     return true
@@ -161,7 +91,7 @@ function is_nix()
 end
 
 -- This may no longer be needed as of neovim 0.11+ and instead causes multiple LSPs to run at once.
-if is_nix() and false then
+if is_nix() and vim.version().major == 0 and vim.version().minor < 11 then
   require('lspconfig').rust_analyzer.setup{
     cmd = {os.getenv("HOME") .. "/.nix-profile/bin/rust-analyzer"},
   }
@@ -183,11 +113,13 @@ if is_nix() and false then
   }
 end
 
--- Enable inlays by default
+-- enable inlays by default
 if vim.lsp.inlay_hint then
   vim.lsp.inlay_hint.enable(true)
 end
 
+-- when scrolled down far enough that parent scopes are hidden, display parent lines to help keep
+-- oriented
 require('treesitter-context').setup{
   enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
   multiwindow = false, -- Enable multiwindow support.

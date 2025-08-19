@@ -114,7 +114,7 @@ function Toggle_LSP()
         -- Reinitialize clients with previous configurations
         for client_id, buffers in pairs(attached_buffers_by_client) do
             local client_config = client_configs[client_id]                -- Retrieve client config
-            local new_client_id, err = vim.lsp.start_client(client_config) -- Start client with config
+            local new_client_id, err = vim.lsp.create_and_init_client(client_config) -- Start client with config
 
             new_ids[client_id] = new_client_id                             -- Map old client ID to new client ID
 
