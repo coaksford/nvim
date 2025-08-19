@@ -34,7 +34,7 @@ return {
     },
     follow_url_func = function(url)
       -- Open the URL in the default web browser.
-      
+
       -- for nvim 0.10+
       if vim.version().major > 0 or vim.version().minor >= 10 then
         vim.ui.open(url)
@@ -46,6 +46,17 @@ return {
           vim.fn.jobstart({"xdg-open", url})
         end
       end
-    end
+    end,
+
+    -- Optional, customize how note IDs are generated given an optional title.
+    ---@param title string|?
+    ---@return string
+    note_id_func = function(title)
+      if title ~= nil then
+        title = title:gsub("[^A-Za-z0-9- ]", "")
+        return title
+      end
+      return tostring(os.time())
+    end,
   },
 }
