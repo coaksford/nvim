@@ -39,10 +39,10 @@ return {
       if vim.version().major > 0 or vim.version().minor >= 10 then
         vim.ui.open(url)
       else
-        if vim.loop.os_uname().sysname == "Darwin" then
+        if vim.uv.os_uname().sysname == "Darwin" then
           vim.fn.jobstart({"open", url})
         end
-        if vim.loop.os_uname().sysname == "Linux" then
+        if vim.uv.os_uname().sysname == "Linux" then
           vim.fn.jobstart({"xdg-open", url})
         end
       end
