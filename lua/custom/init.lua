@@ -1,0 +1,11 @@
+-- Setup neovim lua configuration
+require('custom.opt')
+require('custom.search')
+require('custom.lsp')
+require('custom.completion')
+require('custom.neovide')
+require('custom.keymap')
+require('custom.nvim-tree')
+require('custom.colors')
+require('custom.debug')
+require('custom.lsp-toggle')

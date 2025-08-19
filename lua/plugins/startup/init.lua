@@ -7,7 +7,7 @@ return {
       "nvim-lua/plenary.nvim",
     },
     config = function()
-      require("startup").setup(require("zuli.startup-theme"))
+      require("startup").setup(require("custom.startup-theme"))
     end
   },
   -- creates a project list, remembering repos you've been to
